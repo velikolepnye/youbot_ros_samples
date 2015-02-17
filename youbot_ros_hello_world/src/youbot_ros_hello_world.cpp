@@ -61,25 +61,25 @@ void movePlatform() {
 	geometry_msgs::Twist twist;
 
 	// forward
-	twist.linear.x = 0.05;  // with 0.05 m per sec
+	twist.linear.x = 0.1;  // with 0.05 m per sec
 	platformPublisher.publish(twist);
-	ros::Duration(2).sleep();
+	ros::Duration(1).sleep();
 
 	// backward
-	twist.linear.x = -0.05;
+	twist.linear.x = -0.1;
 	platformPublisher.publish(twist);
-	ros::Duration(2).sleep();
+	ros::Duration(1).sleep();
 
 	// to the left
 	twist.linear.x = 0;
-	twist.linear.y = 0.05;
+	twist.linear.y = 0.1;
 	platformPublisher.publish(twist);
-	ros::Duration(2).sleep();
+	ros::Duration(1).sleep();
 
 	// to the right
-	twist.linear.y = -0.05;
+	twist.linear.y = -0.1;
 	platformPublisher.publish(twist);
-	ros::Duration(2).sleep();
+	ros::Duration(1).sleep();
 
 	// stop
 	twist.linear.y = 0;
