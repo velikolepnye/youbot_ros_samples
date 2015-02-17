@@ -60,28 +60,28 @@ brics_actuator::JointPositions createGripperPositionCommand(double newPosition) 
 void movePlatform() {
 	geometry_msgs::Twist twist;
 
-	// forward
-	twist.linear.x = 0.1;  // with 0.05 m per sec
+	// Вперед
+	twist.linear.x = 0.1;  // Движение со скорость 0.1 м/с
 	platformPublisher.publish(twist);
 	ros::Duration(1).sleep();
 
-	// backward
+	// Назад
 	twist.linear.x = -0.1;
 	platformPublisher.publish(twist);
 	ros::Duration(1).sleep();
 
-	// to the left
+	// Налево
 	twist.linear.x = 0;
 	twist.linear.y = 0.1;
 	platformPublisher.publish(twist);
 	ros::Duration(1).sleep();
 
-	// to the right
+	// Направо
 	twist.linear.y = -0.1;
 	platformPublisher.publish(twist);
 	ros::Duration(1).sleep();
 
-	// stop
+	// Остановка
 	twist.linear.y = 0;
 	platformPublisher.publish(twist);
 }
