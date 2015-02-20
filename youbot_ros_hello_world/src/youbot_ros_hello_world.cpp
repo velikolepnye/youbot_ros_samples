@@ -7,6 +7,9 @@
 #include "boost/units/io.hpp"
 #include "brics_actuator/JointPositions.h"
 #include "geometry_msgs/Twist.h"
+#include <iostream.h>
+
+using namespace std;
 
 ros::Publisher platformPublisher;
 ros::Publisher armPublisher;
@@ -56,32 +59,29 @@ brics_actuator::JointPositions createGripperPositionCommand(double newPosition) 
 }
 
 
-// move platform a little bit back- and forward and to the left and right
+// Движение с заданной скоростью в течение заданного времени
 void movePlatform() {
 	geometry_msgs::Twist twist;
 
-	// Вперед
-	twist.linear.x = 0.1;  // Движение со скорость 0.1 м/с
+	int v_vpered, v_nalevo, t_vn;
+	
+	cout << "С какой скоростью двигаться вперед? \n"; 
+	cin >> v_vpered;
+	
+	cout << "С какой скоростью двигаться налево? \n"; 
+	cin >> v_nalevo;
+	
+	cout << "Сколько секунд двигаться всего? \n"; 
+	cin >> t_vn;
+	
+	// Движение
+	twist.linear.x = v_vpered;  // Движение вперед со скорость "v_vpered" м/с
+    twist.linear.y = v_nalevo;	// Движение налево со скорость "v_nalevo" м/с
 	platformPublisher.publish(twist);
-	ros::Duration(1).sleep();
-
-	// Назад
-	twist.linear.x = -0.1;
-	platformPublisher.publish(twist);
-	ros::Duration(1).sleep();
-
-	// Налево
-	twist.linear.x = 0;
-	twist.linear.y = 0.1;
-	platformPublisher.publish(twist);
-	ros::Duration(1).sleep();
-
-	// Направо
-	twist.linear.y = -0.1;
-	platformPublisher.publish(twist);
-	ros::Duration(1).sleep();
+	ros::Duration(t_vn).sleep();
 
 	// Остановка
+	twist.linear.x = 0;
 	twist.linear.y = 0;
 	platformPublisher.publish(twist);
 }
