@@ -75,7 +75,7 @@ void movePlatform() {
 	cin >> t_vn;
 	
 	// Движение
-	twist.linear.x = v_vpered;  // Движение вперед со скорость "v_vpered" м/с
+	twist.linear.x = v_vpered;	// Движение вперед со скорость "v_vpered" м/с
 	twist.linear.y = v_nalevo;	// Движение налево со скорость "v_nalevo" м/с
 	platformPublisher.publish(twist);
 	ros::Duration(t_vn).sleep();
