@@ -7,7 +7,7 @@
 #include "boost/units/io.hpp"
 #include "brics_actuator/JointPositions.h"
 #include "geometry_msgs/Twist.h"
-#include <iostream.h>
+#include <iostream>
 
 using namespace std;
 
