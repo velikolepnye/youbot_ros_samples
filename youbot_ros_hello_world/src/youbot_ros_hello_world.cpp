@@ -65,16 +65,13 @@ void movePlatform() {
 
 	int v_vpered, v_nalevo, t_vn;
 	
+	// Движение
 	cout << "С какой скоростью двигаться вперед? \n"; 
-	cin >> v_vpered;
-	
+	cin >> v_vpered;	
 	cout << "С какой скоростью двигаться налево? \n"; 
-	cin >> v_nalevo;
-	
+	cin >> v_nalevo;	
 	cout << "Сколько секунд двигаться всего? \n"; 
 	cin >> t_vn;
-	
-	// Движение
 	twist.linear.x = v_vpered;	// Движение вперед со скорость "v_vpered" м/с
 	twist.linear.y = v_nalevo;	// Движение налево со скорость "v_nalevo" м/с
 	platformPublisher.publish(twist);
@@ -86,12 +83,14 @@ void movePlatform() {
 	platformPublisher.publish(twist);
 }
 
-// move arm once up and down
+// Управление манипулятором
 void moveArm() {
 	brics_actuator::JointPositions msg;
 	std::vector<double> jointvalues(5);
+	
+	int coord_0, coord_1, coord_2, coord_3, coord_4;
 
-	// move arm straight up. values were determined empirically
+	// Установить манипулятор в вертикальное положение на 5 секунд
 	jointvalues[0] = 2.95;
 	jointvalues[1] = 1.05;
 	jointvalues[2] = -2.44;
@@ -99,10 +98,29 @@ void moveArm() {
 	jointvalues[4] = 2.95;
 	msg = createArmPositionCommand(jointvalues);
 	armPublisher.publish(msg);
-
 	ros::Duration(5).sleep();
-
-	// move arm back close to calibration position
+	
+	// Установить манипулятор в указанное положение на 5 секунд
+	cout << "Положение звена #1: от 0 до 5.8992; Вертикально: 2.9496 \n"; 
+	cin >> coord_0;	
+	cout << "Положение звена #1: от 0 до 2.7053; Вертикально: 1.1345 \n"; 
+	cin >> coord_1;	
+	cout << "Положение звена #1: от 0 до -5.1836; Вертикально: -2.5482 \n"; 
+	cin >> coord_2;	
+	cout << "Положение звена #1: от 0 до 3.5779; Вертикально: 1.7890 \n"; 
+	cin >> coord_3;	
+	cout << "Положение звена #1: от 0 до 5.8469; Вертикально: 2.9234 \n"; 
+	cin >> coord_4;	
+	jointvalues[0] = coord_0;
+	jointvalues[1] = coord_1;
+	jointvalues[2] = coord_2;
+	jointvalues[3] = coord_3;
+	jointvalues[4] = coord_4;
+	msg = createArmPositionCommand(jointvalues);
+	armPublisher.publish(msg);
+	ros::Duration(5).sleep();
+	
+	// Вернуть манипулятор в исходное положение на 2 секунды
 	jointvalues[0] = 0.11;
 	jointvalues[1] = 0.11;
 	jointvalues[2] = -0.11;
@@ -110,7 +128,6 @@ void moveArm() {
 	jointvalues[4] = 0.111;
 	msg = createArmPositionCommand(jointvalues);
 	armPublisher.publish(msg);
-
 	ros::Duration(2).sleep();
 }
 
