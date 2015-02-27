@@ -63,7 +63,7 @@ brics_actuator::JointPositions createGripperPositionCommand(double newPosition) 
 void movePlatform() {
 	geometry_msgs::Twist twist;
 
-	int v_vpered, v_nalevo, t_vn;
+	float v_vpered, v_nalevo, t_vn;
 	
 	// Движение
 	cout << "С какой скоростью двигаться вперед? \n"; 
@@ -88,7 +88,7 @@ void moveArm() {
 	brics_actuator::JointPositions msg;
 	std::vector<double> jointvalues(5);
 	
-	int coord_0, coord_1, coord_2, coord_3, coord_4;
+	float coord_0, coord_1, coord_2, coord_3, coord_4;
 
 	// Установить манипулятор в вертикальное положение на 5 секунд
 	jointvalues[0] = 2.95;
