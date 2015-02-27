@@ -104,23 +104,30 @@ void moveArm() {
 	cout << "Положение звена #1: от 0 до 5.8992; Вертикально: 2.9496 \n"; 
 	cin >> coord_0;	
 	jointvalues[0] = coord_0;
+	msg = createArmPositionCommand(jointvalues);
+	armPublisher.publish(msg);
 
 	cout << "Положение звена #2: от 0 до 2.7053; Вертикально: 1.1345 \n"; 
 	cin >> coord_1;	
 	jointvalues[1] = coord_1;
+	msg = createArmPositionCommand(jointvalues);
+	armPublisher.publish(msg);
 
 	cout << "Положение звена #3: от 0 до -5.1836; Вертикально: -2.5482 \n"; 
 	cin >> coord_2;	
 	jointvalues[2] = coord_2;
-
+	msg = createArmPositionCommand(jointvalues);
+	armPublisher.publish(msg);
+	
 	cout << "Положение звена #4: от 0 до 3.5779; Вертикально: 1.7890 \n"; 
 	cin >> coord_3;	
 	jointvalues[3] = coord_3;
-
+	msg = createArmPositionCommand(jointvalues);
+	armPublisher.publish(msg);
+	
 	cout << "Положение звена #5: от 0 до 5.8469; Вертикально: 2.9234 \n"; 
 	cin >> coord_4;	
-	jointvalues[4] = coord_4;
-	
+	jointvalues[4] = coord_4;	
 	msg = createArmPositionCommand(jointvalues);
 	armPublisher.publish(msg);
 	ros::Duration(5).sleep();
