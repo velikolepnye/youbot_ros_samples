@@ -79,17 +79,39 @@ void movePlatform() {
 	ros::Duration(t_vn).sleep();
 	*/
 	
+	//Прямо 2 м
 	twist.linear.x = 0.1;
-	platformPublisher.publish(twist); //Прямо 2 м
+	platformPublisher.publish(twist); 
 	ros::Duration(20).sleep();
+	
+	// Остановка
+	twist.linear.x = 0;
+	twist.linear.y = 0;
+	platformPublisher.publish(twist);
+	
+	//Направо 2 м
 	twist.linear.y = -0.1;
-	platformPublisher.publish(twist); //Направо 2 м
+	platformPublisher.publish(twist); 
 	ros::Duration(20).sleep();
+	
+	// Остановка
+	twist.linear.x = 0;
+	twist.linear.y = 0;
+	platformPublisher.publish(twist);
+	
+	//Назад 2 м
 	twist.linear.x = -0.1;
-	platformPublisher.publish(twist); //Назад 2 м
+	platformPublisher.publish(twist); 
 	ros::Duration(20).sleep();
+		
+	// Остановка
+	twist.linear.x = 0;
+	twist.linear.y = 0;
+	platformPublisher.publish(twist);
+	
+	//Налево 2 м
 	twist.linear.y = 0.1;
-	platformPublisher.publish(twist); //Налево 2 м
+	platformPublisher.publish(twist); 
 	ros::Duration(20).sleep();	
 
 	// Остановка
