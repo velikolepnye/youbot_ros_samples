@@ -65,6 +65,7 @@ void movePlatform() {
 
 	float v_vpered, v_nalevo, t_vn;
 	
+	/*
 	// Движение
 	cout << "С какой скоростью двигаться вперед? \n"; 
 	cin >> v_vpered;	
@@ -76,13 +77,27 @@ void movePlatform() {
 	twist.linear.y = v_nalevo;	// Движение налево со скорость "v_nalevo" м/с
 	platformPublisher.publish(twist);
 	ros::Duration(t_vn).sleep();
+	*/
+	
+	twist.linear.x = 0.1;
+	platformPublisher.publish(twist); //Прямо 2 м
+	ros::Duration(20).sleep();
+	twist.linear.y = -0.1;
+	platformPublisher.publish(twist); //Направо 2 м
+	ros::Duration(20).sleep();
+	twist.linear.x = -0.1;
+	platformPublisher.publish(twist); //Назад 2 м
+	ros::Duration(20).sleep();
+	twist.linear.y = 0.1;
+	platformPublisher.publish(twist); //Налево 2 м
+	ros::Duration(20).sleep();	
 
 	// Остановка
 	twist.linear.x = 0;
 	twist.linear.y = 0;
 	platformPublisher.publish(twist);
 }
-
+/*
 // Управление манипулятором
 void moveArm() {
 	brics_actuator::JointPositions msg;
@@ -157,7 +172,7 @@ void moveGripper() {
 	msg = createGripperPositionCommand(0);
 	gripperPublisher.publish(msg);
 }
-
+*/
 int main(int argc, char **argv) {
 	ros::init(argc, argv, "youbot_ros_hello_world");
 	ros::NodeHandle n;
